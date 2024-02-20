@@ -1,5 +1,4 @@
 "use client";
-import CountdownTimer from "./components/CountdownTimer";
 import Preview from "./Preview";
 import { Auction } from './types'; // Assuming you have an Auction type
 import { useEffect, useState } from "react";
@@ -10,7 +9,7 @@ const Products = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://127.0.0.1:5000/dlala_auction/auctions`);
+        const res = await fetch(`http://127.0.0.1:5000/pharmacie/medicaments`);
         const data = await res.json();
         console.log(data)
 
@@ -50,7 +49,6 @@ const Products = () => {
               <p style={{margin: '10% 0'}} >{auction.product.description}</p>
               <div className="card-actions justify-end">
                 <div className="badge badge-outline">
-                  <CountdownTimer targetDate={auction.auctionCloseTime} />
                 </div>
                 <div className="badge badge-outline  " />
                 <Preview  id={auction._id} />

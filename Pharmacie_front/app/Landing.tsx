@@ -60,15 +60,15 @@ export default function Landing() {
         className="hero min-h-screen"
         style={{
           backgroundImage:
-            'url(https://news.artnet.com/app/news-upload/2016/06/christies-auction.jpg)',
+            'url(pharmacie.jpg)',
         }}
       >
         <h2 >Hello, {username}!</h2>
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Welcome to Dlala</h1>
-            <p className="mb-5 mt-5">The First online Auction in Algeria.</p>
+            <h1 className="mb-5 text-5xl font-bold">Welcome to Pharma</h1>
+            <p className="mb-5 mt-5">The first Onligne Medicaments strore</p>
             {!token && (
               <button className="btn btn-primary" onClick={handleSignIn}>
                 Get Started

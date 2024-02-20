@@ -23,10 +23,10 @@ const config: Config = {
   ],
   daisyui: {
     themes: [
-      "luxury",
-      "synthwave",
-      "black",
-      "dark",
+      "winter",
+      "night",
+      "lemonade",
+      "aqua",
       ,"light"
     ],
   },

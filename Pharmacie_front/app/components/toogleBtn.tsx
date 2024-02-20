@@ -3,17 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 
 export default function ToggleBtn() {
-  const [theme, setTheme] = useState<string>('dark');
+  const [theme, setTheme] = useState<string>('night');
   const { theme: activeTheme, setTheme: setActiveTheme } = useTheme();
 
   const toggleTheme = () => {
     let newTheme;
-    if (theme === 'dark') {
-      newTheme = 'luxury';
-    } else if (theme === 'luxury') {
-      newTheme = 'synthwave';
+    if (theme === 'night') {
+      newTheme = 'aqua';
+    } else if (theme === 'aqua') {
+      newTheme = 'lemonade';
     } else {
-      newTheme = 'dark';
+      newTheme = 'night';
     }
     setTheme(newTheme);
     setActiveTheme(newTheme);
@@ -28,26 +28,26 @@ export default function ToggleBtn() {
       <div className="flex flex-row justify-center">
         <div className="form-control ">
           <label className="cursor-pointer label">
-            <span className="label-text">Luxury </span>
+            <span className="label-text">aqua </span>
             <input
               onClick={toggleTheme}
               type="checkbox"
-              checked={theme === 'luxury'}
+              checked={theme === 'aqua'}
               className={`toggle toggle-primary ${
-                theme === 'luxury' ? 'toggle-checked' : ''
+                theme === 'aqua' ? 'toggle-checked' : ''
               }`}
             />
           </label>
         </div>
         <div className="form-control">
           <label className="cursor-pointer label">
-            <span className="label-text">Dark</span>
+            <span className="label-text">night</span>
             <input
               onClick={toggleTheme}
               type="checkbox"
           
               className={`toggle toggle-secondary ${
-                theme === 'dark' ? 'toggle-checked' : ''
+                theme === 'night' ? 'toggle-checked' : ''
               }`}
             />
           </label>
@@ -61,7 +61,7 @@ export default function ToggleBtn() {
               type="checkbox"
              
               className={`toggle toggle-accent ${
-                theme === 'synthwave' ? 'toggle-checked' : ''
+                theme === 'lemonade' ? 'toggle-checked' : ''
               }`}
             />
           </label>

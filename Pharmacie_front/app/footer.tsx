@@ -27,10 +27,9 @@ export default function Footer() {
       </footer>
       <footer className="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300 absolute -bottom-10 w-full">
         <aside className="items-center grid-flow-col">
-          <img className="h-16 w-auto" src="dlala_logo.png" alt="Dlala" />
+          <img className="h-16 w-auto" src="logo_new.png" alt="Pharma" />
           <p>
-            Dlala <br />
-            The First Onligne Algerien Auction
+            Pharma <br />
           </p>
         </aside>
         <nav className="md:place-self-center md:justify-self-end">
