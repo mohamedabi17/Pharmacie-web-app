@@ -1,0 +1,68 @@
+
+# GET http://localhost:5000/dlala_auction
+# ###
+
+# GET http://localhost:5000/dlala_auction/655a10ed6283a5c192d44296
+
+# GET http://localhost:5000/dlala_auction/
+
+
+
+
+# POST  http://localhost:5000/dlala_auction
+# Content-Type: application/json
+
+# {
+#   "profile": {
+#     "username": "malak khty",
+#     "about": "Web developer with a passion for coding",
+#     "photo": "https://example.com/john_doe_photo.jpg",
+#     "coverPhoto": "https://example.com/john_doe_cover.jpg"
+#   },
+#   "personalInfo": {
+#     "firstName": "malak",
+#     "lastName": "khty",
+#     "email": "john.doe@example.com",
+#     "country": "United States",
+#     "streetAddress": "123 Main St",
+#     "city": "Anytown",
+#     "region": "CA",
+#     "postalCode": "12345"
+#   },
+#   "notifications": {
+#     "email": {
+#       "comments": true,
+#       "candidates": true,
+#       "offers": true
+#     },
+#     "pushNotifications": true
+#   }
+# }
+
+# POST  http://localhost:5000/dlala_auction/login
+# Content-Type: application/json
+# {
+#   "username":"manelchaouch",
+#   "password":"manelmanelmanel"
+# }
+
+# curl -X POST -H "Content-Type: application/json" -d '{"username": "manelchaouch", "password":"manelmanelmanel"}' http://127.0.0.1:5000/dlala_auction/login
+
+# curl -H "authorization: Bearer your_token" http://127.0.0.1:5000/dlala_auction/user
+
+
+# GET http://localhost:5000/dlala_auction/auctions
+
+
+
+# GET http://localhost:5000/dlala_auction/
+
+
+# GET http://localhost:5000/dlala_auction/auctions
+
+
+# GET http://localhost:5000/dlala_auction/users
+
+
+
+GET http://localhost:5000/dlala_auction/users/655a10ed6283a5c192d44296
