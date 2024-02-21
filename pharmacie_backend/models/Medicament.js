@@ -9,10 +9,12 @@ const medicamentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  image: {
-    type: String,
-    required: true
-  },
+  images: [
+    {
+      type: String,
+      required: true
+    }
+  ],
   quantity: {
     type: Number,
     required: true,
@@ -22,7 +24,7 @@ const medicamentSchema = new mongoose.Schema({
     type: Number,
     required: true,
     min: 0
-  },
+  }
 });
 
 const Medicament = mongoose.model('Medicament', medicamentSchema);

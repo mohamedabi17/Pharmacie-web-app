@@ -1,26 +1,16 @@
 const mongoose = require('mongoose');
 
-const reviewSchema = new mongoose.Schema({
-  medicament: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Medicament',
+const categorySchema = new mongoose.Schema({
+  name: {
+    type: String,
     required: true,
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-  rating: {
-    type: Number,
-    required: true,
-  },
-  text: {
+  description: {
     type: String,
     required: true,
   },
 });
 
-const Review = mongoose.model('Review', reviewSchema);
+const Category = mongoose.model('Category', categorySchema);
 
-module.exports = Review;
+module.exports = Category;

@@ -3,8 +3,31 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const { User, Medicament, Payement } = require('../models'); // Importing the models
+const User = require('../models/User');
+const Medicament = require('../models/Medicament');
+const Order = require('../models/Order');
+const Payment = require('../models/Payment');
+const Prescription = require('../models/Prescription');
 require('dotenv').config();
+
+
+
+
+const isAdmin = (req, res, next) => {
+  const token = req.headers.authorization;
+  if (!token) return res.sendStatus(401); // Unauthorized
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403); // Forbidden
+
+    // Check if the user's role is 'admin'
+    if (user.role !== 'admin') {
+      return res.status(403).json({ message: 'You are not authorized to access this resource' });
+    }
+
+    next();
+  });
+};
 
 // Middleware for user authentication
 const authenticateToken = (req, res, next) => {
@@ -131,6 +154,31 @@ router.post('/users', async (req, res) => {
     res.status(201).json({ message: 'User created successfully', user });
   } catch (error) {
     console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+// Create a new medicament for sale route (admin only)
+router.post('/medicaments', isAdmin, async (req, res) => {
+  try {
+    const { name, description, image, quantity, price } = req.body;
+
+    // Create a new medicament
+    const medicament = new Medicament({
+      name,
+      description,
+      image,
+      quantity,
+      price,
+    });
+
+    // Save the new medicament to the database
+    await medicament.save();
+
+    res.status(201).json({ message: 'Medicament created successfully', medicament });
+  } catch (error) {
+    console.error(error.message);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
