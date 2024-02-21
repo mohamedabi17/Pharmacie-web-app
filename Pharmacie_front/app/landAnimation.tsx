@@ -2,7 +2,7 @@
 import React from 'react'
 import { useEffect, useState } from "react";
 const Animation = () => {
-  const terms = ["BID", "SELL", "BUY"];
+  const terms = ["Take Care","Of YOUR", "HEALTH"];
   const [currentTermIndex, setCurrentTermIndex] = useState(0);
 
      useEffect(() => {

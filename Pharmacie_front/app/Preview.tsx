@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import {Product,User,ProuductId,CountdownTimerProps} from "./types"
-const Preview: React.FC<ProuductId> = ({ id }) => {
+import {Medicament,User,MedicamentId} from "./types"
+const Preview: React.FC<MedicamentId> = ({ id }) => {
   return (
     <Link className="btn glass flex-center mt-5" href={`overview/${id}`}>
       View

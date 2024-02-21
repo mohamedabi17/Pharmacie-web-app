@@ -1,74 +1,82 @@
+
 export interface User {
-  profile: {
-    username: string;
-    about: string;
-    photo: string;
-    coverPhoto: string;
-  };
-  personalInfo: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    country: string;
-    streetAddress: string;
-    city: string;
-    region: string;
-    postalCode: string;
-  };
-  notifications: {
-    email: {
-      comments: boolean;
-      candidates: boolean;
-      offers: boolean;
-    };
-  };
   _id: string;
+  username: string;
+  email: string;
+  password: string;
+  role: 'customer' | 'admin';
+  __v: number;
+}
+export interface Medicament {
+  _id: string;
+  name: string;
+  description: string;
+  images: string[];
+  quantity: number;
+  price: number;
   __v: number;
 }
 
-
-
-export interface SellerAuction {
-  id: number;
-  seller: User;
-  auction: Auction;
+export interface Order {
+  _id: string;
+  customer: string;
+  products: string[];
+  status: 'pending' | 'processing' | 'shipped';
+  totalPrice: number;
 }
 
-export interface Bid {
-  id: number;
-  auction: Auction;
-  bidder: User;
-  price: number;
+export interface Payment {
+  _id: string;
+  order: string;
+  paymentMethod: string;
+  transactionId: string;
+  status: 'pending' | 'paid';
 }
 
-export interface BuyerAuction {
-  id: number;
-  buyer: User;
-  auction: Auction;
+export interface Prescription {
+  _id: string;
+  customer: string;
+  prescriptionImage: string;
+  status: 'pending' | 'approved';
 }
 
-export interface Product {
-  _id: number;
-  title: string;
+export interface Review {
+  _id: string;
+  product: string;
+  user: string;
+  rating: number;
+  text: string;
+}
+
+export interface Cart {
+  _id: string;
+  user: string;
+  products: {
+    product: string;
+    quantity: number;
+  }[];
+  totalPrice: number;
+}
+
+export interface Address {
+  _id: string;
+  user: string;
+  type: 'shipping' | 'billing';
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+  };
+}
+
+export interface Category {
+  _id: string;
+  name: string;
   description: string;
-  image: string[]; // Change this to an array of strings
+  __v: number;
 }
 
-export interface Auction {
- _id: number;
-  product: Product;
-  seller: SellerAuction;
-  startPrice: number;
-  bestPrice: number;
-  auctionCloseTime: Date;
-  startDate: Date;
-}
-
-
-export interface CountdownTimerProps {
-  targetDate: Date; // Update the type to accept a Date object
-}
-
-export interface ProuductId {
-  id: number; // Update the type to accept a Date object
+export interface MedicamentId {
+  id: string;
 }

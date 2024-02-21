@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
       about: "",
       photo: "",
       coverPhoto: "",
+      secretCode: "", // Added the secretCode field
     },
     personalInfo: {
       firstName: "",
@@ -25,6 +26,7 @@ import { useRouter } from "next/navigation";
       city: "",
       region: "",
       postalCode: "",
+
     },
     notifications: {
       email: {
@@ -43,6 +45,14 @@ const passwordsMatch = (): boolean => {
   return password === confirmPassword;
   
 };
+const secretCodeIsValid = (): boolean => {
+  const { secretCode } = formData.profile;
+  const secretCodeFromEnv = process.env.SECRET_CODE;
+  console.log( secretCode === secretCodeFromEnv)
+  return secretCode === secretCodeFromEnv;
+
+};
+
 const handleSelectChange = (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -52,6 +62,17 @@ const handleSelectChange = (
       personalInfo: {
         ...prevData.personalInfo,
         [name]: value,
+      },
+    }));
+  };
+
+   const handleSecretCodeChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { secretCode, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      profile: {
+        ...prevData.profile,
+        secretCode: value,
       },
     }));
   };
@@ -172,26 +193,30 @@ const handleProfileDetailsChange = (e: React.ChangeEvent<HTMLInputElement | HTML
   };
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    
-    e.preventDefault();
-    passwordsMatch(); 
-     console.log(e)
-     console.log(formData)
-    
-    
-    try {
-      console.log(formData)
-      const response = await axios.post("http://localhost:5000/dlala_auction/users", formData); 
-      
-      console.log("Data posted successfully", response.data);
-      setSubmitSuccess(true)
-       router.push('/login');
-    } catch (error) {
-      // Handle error, e.g., show an error message
-      console.error("Error posting data", error);
-      setSubmitSuccess(false)
-    }
-  };
+  e.preventDefault();
+  passwordsMatch();
+
+  const secretCodeFromEnv = process.env.SECRET_CODE;
+
+  if (formData.profile.secretCode !== secretCodeFromEnv) {
+    console.error('Unauthorized admin account creation');
+    // Display an error message to the user
+    return;
+  }
+
+  try {
+    console.log(formData);
+    const response = await axios.post('http://localhost:5000/pharmacie/users', formData);
+    console.log('Data posted successfully', response.data);
+    setSubmitSuccess(true);
+    router.push('/login');
+  } catch (error) {
+    // Handle error, e.g., show an error message
+    console.error('Error posting data', error);
+    setSubmitSuccess(false);
+  }
+};
+
 
   return ( 
     <form onSubmit={handleSubmit} className="mb-30 min-h-screen mb-20">
@@ -199,7 +224,7 @@ const handleProfileDetailsChange = (e: React.ChangeEvent<HTMLInputElement | HTML
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
-            src="dlala_logo.png"
+            src="logo_new.png"
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
@@ -209,8 +234,7 @@ const handleProfileDetailsChange = (e: React.ChangeEvent<HTMLInputElement | HTML
         <div className="border-b border-white pb-12">
           <h2 className="text-base font-semibold leading-7white">Profile</h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">
-            This information will be displayed publicly so be careful what you
-            share.
+            most of the information will be  private so dont worry
           </p>
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -224,7 +248,7 @@ const handleProfileDetailsChange = (e: React.ChangeEvent<HTMLInputElement | HTML
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
-                    dlala.com/
+                    pharma.com/
                   </span>
                   <input
                     type="text"
@@ -232,7 +256,7 @@ const handleProfileDetailsChange = (e: React.ChangeEvent<HTMLInputElement | HTML
                     id="username"
                     autoComplete="username"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1white placeholder:text-grey-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="mohamedabi"
+                    placeholder="johndoe"
                     onChange={handleProfileDetailsChange}
                   />
                 </div>
@@ -295,39 +319,24 @@ const handleProfileDetailsChange = (e: React.ChangeEvent<HTMLInputElement | HTML
               </div>
             </div>
 
-            <div className="col-span-full">
-              <label
-                htmlFor="coverPhoto"
-                className="block text-sm font-medium leading-6white"
-              >
-                Cover photo
+          <div className="sm:col-span-4">
+              <label htmlFor="secretCode" className="block text-sm font-medium leading-6 white">
+                Secret Code Only for Admins
               </label>
-              <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                <div className="text-center">
-                  <PhotoIcon
-                    className="mx-auto h-12 w-12 text-gray-300"
-                    aria-hidden="true"
+              <div className="mt-2">
+                <div className={`form-control ${secretCodeIsValid()  ? '' : 'input-error'}`}>
+                  <label className="label">
+                    <span className="label-text">Secret Code</span>
+                  </label>
+                  <input
+                    type="password"
+                    name="secretCode"
+                    placeholder="Secret Code"
+                    className="input input-bordered"
+                    value={formData.profile.secretCode}
+                    onChange={handleSecretCodeChange}
+                    required
                   />
-                  <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                    <label
-                      htmlFor="coverPhoto"
-                      className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                    >
-                      <span>Upload a file</span>
-                      <input
-                        id="coverPhoto"
-                        name="coverPhoto"
-                        type="file"
-                        className="sr-only"
-                        onChange={handleImageChange}
-                        
-                      />
-                    </label>
-                    <p className="pl-1">or drag and drop</p>
-                  </div>
-                  <p className="text-xs leading-5 text-gray-600">
-                    PNG, JPG, GIF up to 10MB
-                  </p>
                 </div>
               </div>
             </div>

@@ -91,11 +91,9 @@ const handleSignOut = () => {
               <li>
                 <Link href="/login">Log In</Link>
               </li>
+
               <li>
-                <Link href="/sell">Sell</Link>
-              </li>
-              <li>
-                <Link href="/bid">Bid</Link>
+                <Link href="/buy">Buy</Link>
               </li>
             </ul>
           </div>

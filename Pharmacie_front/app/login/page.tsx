@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
   const handleLogin = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/dlala_auction/login', {
+      const res = await axios.post('http://localhost:5000/medicaments/login', {
         username,
         password,
       });
@@ -34,11 +34,11 @@ const Login = () => {
             <form className="card-body" onSubmit={handleLogin}>
               <div className="text-center lg:text-left">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                  <img className="mx-auto h-10 w-auto" src="dlala_logo.png" alt="Your Company" />
+                  <img className="mx-auto h-10 w-auto" src="logo_new.png" alt="Your Company" />
                   <div className="text-center lg:text-center flex-start">
                     <h1 className="text-5xl font-bold">Login now!</h1>
                     <p className="py-6">
-                      Login to Dlala for free to get full access to view all the Auctions details and take bids
+                      Login to Pharma for free to get full access to view all the Medicaments details 
                     </p>
                   </div>
                 </div>
