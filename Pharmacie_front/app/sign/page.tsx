@@ -1,7 +1,6 @@
 "use client"
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { useState,useEffect } from "react";
-import { SignUp } from "@clerk/nextjs";
 import axios from "axios";
 // import { redirect } from "next/navigation";
 // import { Redirect } from "next";
@@ -210,7 +209,7 @@ const handleProfileDetailsChange = (e: React.ChangeEvent<HTMLInputElement | HTML
     const response = await axios.post('http://localhost:5000/pharmacie/users', formData);
     console.log('Data posted successfully', response.data);
     setSubmitSuccess(true);
-    router.push('/login');
+    // router.push('/login');
   } catch (error) {
     // Handle error, e.g., show an error message
     console.error('Error posting data', error);
