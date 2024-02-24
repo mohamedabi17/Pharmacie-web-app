@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
       password: "", 
       confirmPassword: "", // Add confirmPassword field
       about: "",
-      photo: "",
       coverPhoto: "",
       secretCode: "", // Added the secretCode field
     },
@@ -66,16 +65,17 @@ const handleSelectChange = (
     }));
   };
 
-   const handleSecretCodeChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      profile: {
-        ...prevData.profile,
-        secretCode: value,
-      },
-    }));
-  };
+const handleSecretCodeChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const { name, value } = e.target;
+  setFormData((prevData) => ({
+    ...prevData,
+    profile: {
+      ...prevData.profile,
+      [name]: value,
+    },
+  }));
+};
+
 
 const handlepasswordChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
   const { name, value } = e.target;
@@ -137,7 +137,7 @@ const handleProfileDetailsChange = (e: React.ChangeEvent<HTMLInputElement | HTML
   console.log("Name:", name);
   console.log("Value:", value);
 
-  if (name !== 'photo' && name !== 'coverPhoto') {
+  if ( name !== 'coverPhoto') {
     setFormData((prevData) => ({
       ...prevData,
       profile: {
@@ -196,8 +196,9 @@ const handleProfileDetailsChange = (e: React.ChangeEvent<HTMLInputElement | HTML
   e.preventDefault();
   passwordsMatch();
 
-  const secretCodeFromEnv = process.env.SECRET_CODE;
-
+  const secretCodeFromEnv = "dzpharma2024";
+  console.log(formData.profile.secretCode)
+  console.log(secretCodeFromEnv)
   if (formData.profile.secretCode !== secretCodeFromEnv) {
     console.error('Unauthorized admin account creation');
     // Display an error message to the user
@@ -287,10 +288,10 @@ const handleProfileDetailsChange = (e: React.ChangeEvent<HTMLInputElement | HTML
 
             <div className="col-span-full">
               <label
-                htmlFor="photo"
+                htmlFor="coverPhoto"
                 className="block text-sm font-medium leading-6white"
               >
-                Photo
+                coverPhoto
               </label>
               <div className="mt-2 flex items-center gap-x-3">
                 <UserCircleIcon
@@ -301,13 +302,13 @@ const handleProfileDetailsChange = (e: React.ChangeEvent<HTMLInputElement | HTML
                  
                   <div className="mt-4 flex text-sm leading-6 text-gray-600">
                     <label
-                      htmlFor="photo"
+                      htmlFor="coverPhoto"
                       className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
-                      <span>Upload a Profile Photo</span>
+                      <span>Upload a Profile coverPhoto</span>
                       <input
-                        id="photo"
-                        name="photo"
+                        id="coverPhoto"
+                        name="coverPhoto"
                         type="file"
                         className="sr-only"
                         onChange={handleImageChange}
@@ -334,7 +335,7 @@ const handleProfileDetailsChange = (e: React.ChangeEvent<HTMLInputElement | HTML
                     placeholder="Secret Code"
                     className="input input-bordered"
                     value={formData.profile.secretCode}
-                    onChange={handleProfileDetailsChange}
+                    onChange={handleSecretCodeChange}
                     required
                   />
                 </div>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Navbar from "./navbar";
 export default function Footer() {
   return (
+    <>
     <footer className="footer p-10 bg-base-200 text-base-content relative bottom-0 w-full">
       <footer className="footer p-10 bg-base-200 text-base-content absolute bottom-0 w-full">
         <nav>
@@ -70,6 +71,7 @@ export default function Footer() {
           </div>
         </nav>
       </footer>
-    </footer>
+    </footer></>
+    
   );
 }

@@ -97,6 +97,10 @@ const handleSignOut = () => {
               </li>
             </ul>
           </div>
+          <label className="input input-bordered flex items-center gap-2">
+            <input type="text"  placeholder="search Your medicine" />
+            <span className="badge badge-info">   <img className="h-5 w-auto" src="search_icon.png" alt="pharma" /></span>
+          </label>
         </div>
         <div className="navbar-center">
           <Link href="/" className="btn btn-ghost normal-case text-xl">
@@ -117,6 +121,7 @@ const handleSignOut = () => {
             </>
           ) : (
              <>
+             
             <div className="avatar offline">
               <div className="w-24 rounded-full">
                 <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
