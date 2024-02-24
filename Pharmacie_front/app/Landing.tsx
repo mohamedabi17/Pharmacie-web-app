@@ -40,10 +40,10 @@ export default function Landing() {
           if (userData.user){
             setToken(userData.token || '');
             console.log(userData.token)
-            setSession(userData.user.session.cookie || '');
-            console.log(userData.user.session.cookie)
-            setUsername(userData.user.user.username || '');
-            console.log(userData.user.user.username )
+            // setSession(userData.user.session.cookie || '');
+            // console.log(userData.user.session.cookie)
+            setUsername(userData.user.username || '');
+            console.log(userData )
           }
           else{
             console.log("userData.user is not defined")
@@ -63,7 +63,7 @@ export default function Landing() {
             'url(pharmacie.jpg)',
         }}
       >
-        <h2 >Hello, {username}!</h2>
+        <h1 className='bold' >Hello, {username}!</h1>
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">

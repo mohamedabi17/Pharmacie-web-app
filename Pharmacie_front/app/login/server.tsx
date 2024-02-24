@@ -4,7 +4,7 @@ import axios from "axios";
 // Define the server-side login function
 export const handleServerLogin = async ({ username, password }: { username: string; password: string }) => {
   try {
-    const response = await axios.post("http://127.0.0.1:5000/dlala_auction/login", {
+    const response = await axios.post("http://127.0.0.1:5000/pharmacie/login", {
       username,
       password,
     });
@@ -12,7 +12,7 @@ export const handleServerLogin = async ({ username, password }: { username: stri
     const token = response.data.token;
     // localStorage.setItem('token', token);
 
-    const userResponse = await axios.get("http://127.0.0.1:5000/dlala_auction/user", {
+    const userResponse = await axios.get("http://127.0.0.1:5000/pharmacie/user", {
       headers: {
         authorization: ` ${token}`,
       },

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-
+import {handleServerLogin} from './server'
 const Login = () => {
   const router = useRouter();
   const [username, setUsername] = useState('');
@@ -12,13 +12,11 @@ const Login = () => {
   const handleLogin = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/medicaments/login', {
-        username,
-        password,
-      });
-      console.log(res.data);
-      localStorage.setItem('user', JSON.stringify(res.data.user));
-      localStorage.setItem('token', res.data.token);
+  
+      const res = await handleServerLogin({username,password})
+      console.log(res);
+      localStorage.setItem('user', JSON.stringify(res.user));
+      localStorage.setItem('token', res.token);
       router.push('/');
     } catch (error) {
       setError("Invalid username or password");

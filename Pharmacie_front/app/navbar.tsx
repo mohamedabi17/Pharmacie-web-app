@@ -39,10 +39,10 @@ const handleSignOut = () => {
           if (userData.user){
             setToken(userData.token || '');
             console.log(userData.token)
-            setSession(userData.user.session.cookie || '');
-            console.log(userData.user.session.cookie)
-            setUsername(userData.user.user.username || '');
-            console.log(userData.user.user.username )
+            // setSession(userData.user.session.cookie || '');
+            // console.log(userData.user.session.cookie)
+            setUsername(userData.user.username || '');
+            console.log(userData.user.username )
           }
           else{
             console.log("userData.user is not defined")
@@ -50,8 +50,7 @@ const handleSignOut = () => {
          
         } else {
           console.log("No user data found in localStorage");
-        }
-  }, []);
+        }});
 
 
   return (
