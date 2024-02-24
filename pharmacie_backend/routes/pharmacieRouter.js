@@ -87,7 +87,8 @@ router.post('/login', async (req, res) => {
 router.get('/user', authenticateToken, (req, res) => {
   try {
     // Access user data using req.user
-    res.status(200).json({ user: req.user, message: 'User data retrieved successfully', session: req.session });
+    const usr = users.find((u) => u.profile.username === req.user.username);
+    res.status(200).json({ user: usr, message: 'User data retrieved successfully', session: req.session });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
@@ -149,16 +150,19 @@ async function getUser(req, res, next) {
 router.post('/users', async (req, res) => {
   try {
     const { profile, personalInfo, notifications } = req.body;
-  
+        // Check if the username is unique
+    const existingUser = await User.findOne({ 'profile.username': profile.username });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Username already exists' });
+    }
+
     // // Check if the secret code matches the SECRET environment variable
     const  {secretCode}  = profile;
     const isAdmin = secretCode === process.env.SECRET;
     // Set the role based on whether the user is an admin or not
     const role = isAdmin ? 'admin' : 'customer';
     // Create the user with the correct role
-    const user = new User({ profile,  personalInfo, notifications,role });
-    console.log(user)
-   
+    const user = new User({profile, personalInfo, notifications,role });
     await user.save();
     res.status(201).json({ message: 'User created successfully', user });
   } catch (error) {
