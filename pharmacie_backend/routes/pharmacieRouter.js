@@ -151,20 +151,19 @@ router.post('/users', async (req, res) => {
     const { profile, personalInfo, notifications } = req.body;
   
     // // Check if the secret code matches the SECRET environment variable
-    const { secretCode } = profile;
+    const  {secretCode}  = profile;
     const isAdmin = secretCode === process.env.SECRET;
-    console.log(isAdmin)
     // Set the role based on whether the user is an admin or not
     const role = isAdmin ? 'admin' : 'customer';
-
     // Create the user with the correct role
-    const user = new User({ ...profile, role, personalInfo, notifications });
+    const user = new User({ profile,  personalInfo, notifications,role });
     console.log(user)
+   
     await user.save();
     res.status(201).json({ message: 'User created successfully', user });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: 'Internal server error',error });
   }
 });
 

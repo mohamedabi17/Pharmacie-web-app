@@ -17,15 +17,15 @@ const userSchema = new mongoose.Schema({
     },
     about: {
       type: String,
-      required: true,
+      required: false,
     },
     coverPhoto: {
       type: String,
-      required: true,
+      required: false,
     },
     secretCode: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   personalInfo: {
