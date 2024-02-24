@@ -149,7 +149,17 @@ async function getUser(req, res, next) {
 router.post('/users', async (req, res) => {
   try {
     const { profile, personalInfo, notifications } = req.body;
-    const user = new User({ profile, personalInfo, notifications });
+  
+    // // Check if the secret code matches the SECRET environment variable
+    const { secretCode } = profile;
+    const isAdmin = secretCode === process.env.SECRET;
+    console.log(isAdmin)
+    // Set the role based on whether the user is an admin or not
+    const role = isAdmin ? 'admin' : 'customer';
+
+    // Create the user with the correct role
+    const user = new User({ ...profile, role, personalInfo, notifications });
+    console.log(user)
     await user.save();
     res.status(201).json({ message: 'User created successfully', user });
   } catch (error) {
@@ -157,6 +167,7 @@ router.post('/users', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
 
 
 // Create a new medicament for sale route (admin only)
