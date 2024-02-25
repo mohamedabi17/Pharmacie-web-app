@@ -9,7 +9,7 @@ export default function Navbar() {
     const [sessionID, setSession] = useState('');
     const [token, setToken] = useState('');
     const [username, setUsername] = useState('');
-
+    const [role, setRole] = useState('');
   const handleSignIn = () => {
     router.push('/login');
   };
@@ -23,34 +23,39 @@ const handleSignOut = () => {
   setToken('');
   setSession('');
   setUsername('');
+  setRole('');
 
   // Redirect to the login page or any other desired page
   router.push('/login');
 };
 
 
-   useEffect(() => {
-        const storedUser = localStorage.getItem('user');
 
-        if (storedUser) {
-          const userData = JSON.parse(storedUser);
-          console.log(userData)
-          
-          if (userData.user){
-            setToken(userData.token || '');
-            console.log(userData.token)
-            // setSession(userData.user.session.cookie || '');
-            // console.log(userData.user.session.cookie)
-            setUsername(userData.user.username || '');
-            console.log(userData.user.username )
-          }
-          else{
-            console.log("userData.user is not defined")
-          }
-         
-        } else {
-          console.log("No user data found in localStorage");
-        }});
+
+useEffect(() => {
+  const storedUser = localStorage.getItem('user');
+  const token = localStorage.getItem('token');
+  if (storedUser) {
+    try {
+      const userData = JSON.parse(storedUser);
+      console.log(userData);
+      
+      if (userData.user) {
+        setToken(token || '');
+        setUsername(userData.user.profile.username || '');
+        setRole(userData.user.role)
+        console.log(userData.user.role)
+      } else {
+        console.log("userData.user is not defined");
+      }
+    } catch (error) {
+      console.error("Error parsing stored user data:", error);
+      console.log("Stored user data:", storedUser);
+    }
+  } else {
+    console.log("No user data found in localStorage");
+  }
+}, []);
 
 
   return (
@@ -94,6 +99,10 @@ const handleSignOut = () => {
               <li>
                 <Link href="/buy">Buy</Link>
               </li>
+              {role == "admin"&& <li>
+                <Link href="/dashboard">Dashboard</Link>
+              </li>}
+             
             </ul>
           </div>
           <label className="input input-bordered flex items-center gap-2">

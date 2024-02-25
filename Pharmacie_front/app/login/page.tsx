@@ -9,15 +9,21 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState("");
 
-  const handleLogin = async (e:React.FormEvent<HTMLFormElement>) => {
+const handleLogin = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
   
       const res = await handleServerLogin({username,password})
       console.log(res);
-      localStorage.setItem('user', JSON.stringify(res.user));
-      localStorage.setItem('token', res.token);
-      router.push('/');
+      if(res.user){
+          localStorage.setItem('user', JSON.stringify(res.user));
+          router.push('/');
+      }
+      else{
+           setError("user is undefined");
+           console.error("Login failed", error);
+      }
+      
     } catch (error) {
       setError("Invalid username or password");
       console.error("Login failed", error);

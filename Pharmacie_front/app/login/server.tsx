@@ -8,9 +8,9 @@ export const handleServerLogin = async ({ username, password }: { username: stri
       username,
       password,
     });
-
+    console.log(response)
     const token = response.data.token;
-    // localStorage.setItem('token', token);
+    localStorage.setItem('token', token);
 
     const userResponse = await axios.get("http://127.0.0.1:5000/pharmacie/user", {
       headers: {
