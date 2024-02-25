@@ -84,14 +84,15 @@ router.post('/login', async (req, res) => {
 });
 
 // Get user data route
-router.get('/user', authenticateToken, (req, res) => {
+router.get('/user', authenticateToken, async(req, res) => {
   try {
     // Access user data using req.user
+    const users = await User.find();
     const usr = users.find((u) => u.profile.username === req.user.username);
     res.status(200).json({ user: usr, message: 'User data retrieved successfully', session: req.session });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: 'Internal server error' ,erreur});
   }
 });
 
