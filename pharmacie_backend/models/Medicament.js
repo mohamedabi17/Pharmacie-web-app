@@ -15,11 +15,6 @@ const medicamentSchema = new mongoose.Schema({
       required: true
     }
   ],
-  quantity: {
-    type: Number,
-    required: true,
-    min: 0
-  },
   price: {
     type: Number,
     required: true,

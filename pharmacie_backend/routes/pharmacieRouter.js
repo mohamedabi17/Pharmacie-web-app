@@ -11,22 +11,32 @@ const Prescription = require('../models/Prescription');
 require('dotenv').config();
 
 
-
+// Session middleware
+router.use(
+  session({
+    secret: process.env.JWT_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: true, // Set to true if using HTTPS
+      maxAge: 24 * 60 * 60 * 1000 * 60, // Session expiration time in milliseconds (1 day in this example)
+    },
+  })
+);
 
 const isAdmin = (req, res, next) => {
   const token = req.headers.authorization;
+  const role = req.headers.role;
+  console.log(role)
   if (!token) return res.sendStatus(401); // Unauthorized
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403); // Forbidden
-
+ 
     // Check if the user's role is 'admin'
-    if (user.role !== 'admin') {
+    if (role !== 'admin') {
       return res.status(403).json({ message: 'You are not authorized to access this resource' });
     }
-
     next();
-  });
+
+
 };
 
 // Middleware for user authentication
@@ -42,18 +52,7 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-// Session middleware
-router.use(
-  session({
-    secret: process.env.JWT_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      secure: true, // Set to true if using HTTPS
-      maxAge: 24 * 60 * 60 * 1000 * 60, // Session expiration time in milliseconds (1 day in this example)
-    },
-  })
-);
+
 
 // User login route
 router.post('/login', async (req, res) => {
@@ -177,14 +176,13 @@ router.post('/users', async (req, res) => {
 // Create a new medicament for sale route (admin only)
 router.post('/medicaments', isAdmin, async (req, res) => {
   try {
-    const { name, description, image, quantity, price } = req.body;
+    const { name, description, images, price } = req.body;
 
     // Create a new medicament
     const medicament = new Medicament({
       name,
       description,
-      image,
-      quantity,
+      images,
       price,
     });
 
@@ -223,16 +221,32 @@ router.post('/buy', authenticateToken, async (req, res) => {
   }
 });
 
-// Get all medicaments route
 router.get('/medicaments', async (req, res) => {
   try {
-    const medicaments = await Medicament.find();
+    const searchQuery = req.query.search;
+    let medicaments;
+
+    if (searchQuery) {
+      // Perform the search based on the query string
+      medicaments = await Medicament.find({
+        $or: [
+          { name: { $regex: searchQuery, $options: 'i' } },
+          { description: { $regex: searchQuery, $options: 'i' } },
+        ],
+      });
+    } else {
+      // Get all medicaments
+      medicaments = await Medicament.find();
+    }
+
     res.json(medicaments);
   } catch (error) {
-    console.error(error.message);
+    console.error('Error searching for medicaments', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+
 
 // Get one auction by ID route
 router.get('/medicaments/:id', async (req, res) => {
