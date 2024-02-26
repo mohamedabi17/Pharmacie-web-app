@@ -30,13 +30,11 @@ const Products = () => {
   return (
 <div>
   <div className="mx-auto mb-20 max-w-2xl" style={{ maxWidth: "120rem" }}>
-    <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-      <div className="flex justify-center">
-      <label className="input input-bordered flex items-center gap-2">
-            <input type="text"  placeholder="search Your medicine" />
-            <span className="badge badge-info">   <img className="h-5 w-auto" src="search_icon.png" alt="pharma" /></span>
-          </label>
+       <div className="flex justify-center">
+           <Search/>
       </div>
+      <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+   
       {medicaments.map((medicament) => (
         <div key={medicament._id} className="flex flex-col min-h-screen mb-20">
           <div className="card-body">

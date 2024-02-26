@@ -23,8 +23,11 @@ const Overview = ({ params: { id } }: { params: { id: number } }) => {
   return (
     <>
       {medicament && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4  min-h-screen mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1  ">
+          <div>
             <MedicamentCard medicament={medicament} />
+          </div>
+          <div></div>
         </div>
       )}
     </>
@@ -33,3 +36,4 @@ const Overview = ({ params: { id } }: { params: { id: number } }) => {
 
 export default Overview;
 
+// grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 
