@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-
+import Search from "./search";
 
 export default function Navbar() {
     const router = useRouter();
@@ -105,10 +105,7 @@ useEffect(() => {
              
             </ul>
           </div>
-          <label className="input input-bordered flex items-center gap-2">
-            <input type="text"  placeholder="search Your medicine" />
-            <span className="badge badge-info">   <img className="h-5 w-auto" src="search_icon.png" alt="pharma" /></span>
-          </label>
+          <Search/>
         </div>
         <div className="navbar-center">
           <Link href="/" className="btn btn-ghost normal-case text-xl">
