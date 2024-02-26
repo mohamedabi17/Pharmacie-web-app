@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Search from "./search";
+import { UserCircleIcon } from '@heroicons/react/20/solid';
 
 export default function Navbar() {
     const router = useRouter();
@@ -10,6 +11,7 @@ export default function Navbar() {
     const [token, setToken] = useState('');
     const [username, setUsername] = useState('');
     const [role, setRole] = useState('');
+     const [user, setUser] = useState('');
   const handleSignIn = () => {
     router.push('/login');
   };
@@ -24,7 +26,7 @@ const handleSignOut = () => {
   setSession('');
   setUsername('');
   setRole('');
-
+  setUser('');
   // Redirect to the login page or any other desired page
   router.push('/login');
 };
@@ -44,6 +46,7 @@ useEffect(() => {
         setToken(token || '');
         setUsername(userData.user.profile.username || '');
         setRole(userData.user.role)
+        setUser(userData.user)
         console.log(userData.user.role)
       } else {
         console.log("userData.user is not defined");
@@ -64,20 +67,18 @@ useEffect(() => {
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+      </div>
+
+              
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
                   d="M4 6h16M4 12h16M4 18h7"
                 />
-              </svg>
+      
             </label>
             <ul
               tabIndex={0}
@@ -95,7 +96,9 @@ useEffect(() => {
               <li>
                 <Link href="/login">Log In</Link>
               </li>
-
+                <li>
+                <Link href="/profile">Profile</Link>
+              </li>
               <li>
                 <Link href="/buy">Buy</Link>
               </li>
@@ -118,7 +121,7 @@ useEffect(() => {
               <p className="text-base-40 mr-2">{username}</p>
               <div className="avatar online">
               <div className="w-16 rounded-full">
-                <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                  <img src={user?.profile?.coverPhoto} className="h-5 w-5" alt="profile picture" srcSet="" />
               </div>
             </div>
               <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg" onClick={handleSignOut} >                Sign Out

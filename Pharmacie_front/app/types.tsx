@@ -7,6 +7,37 @@ export interface User {
   role: 'customer' | 'admin';
   __v: number;
 }
+
+export interface Profile {
+  profile: {
+    username: string;
+    password: string;
+    confirmPassword: string;
+    about?: string;
+    coverPhoto?: string;
+    secretCode?: string;
+  };
+  personalInfo: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    country: string;
+    streetAddress: string;
+    city: string;
+    region: string;
+    postalCode: string;
+  };
+  notifications: {
+    email: {
+      comments: boolean;
+      candidates: boolean;
+      offers: boolean;
+    };
+    pushNotifications: boolean;
+  };
+  role: 'customer' | 'admin';
+}
+
 export interface Medicament {
   _id: string;
   name: string;
