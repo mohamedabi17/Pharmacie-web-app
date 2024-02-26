@@ -27,7 +27,10 @@ const config: Config = {
       "night",
       "lemonade",
       "aqua",
-      ,"light"
+      "light",
+      "nord",
+      "sunset",
+      "black",
     ],
   },
  

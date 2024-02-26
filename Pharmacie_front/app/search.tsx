@@ -44,12 +44,10 @@ function Search() {
         className="btn m-1"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
-        <img
-          src="search_icon.png"
-          alt="Search"
-          className="cursor-pointer w-8 h-8"
-          onClick={() => setSearchQuery('')}
-        />
+        <button  className="btn btn-ghost btn-circle cursor-pointer w-8 h-8 text-white"
+          onClick={() => setSearchQuery('')} >
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+    </button>
       </div>
       {isDropdownOpen && (
         <ul

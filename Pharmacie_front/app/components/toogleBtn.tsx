@@ -11,7 +11,7 @@ export default function ToggleBtn() {
     if (theme === 'night') {
       newTheme = 'aqua';
     } else if (theme === 'aqua') {
-      newTheme = 'lemonade';
+      newTheme = 'light';
     } else {
       newTheme = 'night';
     }
@@ -61,7 +61,7 @@ export default function ToggleBtn() {
               type="checkbox"
              
               className={`toggle toggle-accent ${
-                theme === 'lemonade' ? 'toggle-checked' : ''
+                theme === 'light' ? 'toggle-checked' : ''
               }`}
             />
           </label>

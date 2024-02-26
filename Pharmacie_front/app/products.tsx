@@ -29,14 +29,14 @@ const Products = () => {
 
   return (
 <div>
-  <div className="mx-auto mb-20 max-w-2xl" style={{ maxWidth: "120rem" }}>
+  <div className="mx-auto  max-w-2xl" style={{ maxWidth: "120rem" }}>
        <div className="flex justify-center">
            <Search/>
       </div>
       <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
    
       {medicaments.map((medicament) => (
-        <div key={medicament._id} className="flex flex-col min-h-screen mb-20">
+        <div key={medicament._id} className="flex flex-col min-h-screen  w-100 bg-base-100 shadow-xl ">
           <div className="card-body">
             <div className="carousel">
               {medicament.images.map((imageUrl, index) => (
@@ -51,10 +51,7 @@ const Products = () => {
                 start Price {medicament.price}$
               </div>
               <p style={{margin: '10% 0'}} >{medicament.description}</p>
-              <div className="card-actions justify-end">
-                <div className="badge badge-outline">
-                </div>
-                <div className="badge badge-outline  " />
+              <div className="card-actions justify-end relative">
                 <Preview  id={medicament._id} />
               </div>
             </div>
