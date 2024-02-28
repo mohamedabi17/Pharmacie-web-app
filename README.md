@@ -46,8 +46,8 @@ This project includes the following features:
 
 The project structure is organized into the following directories:
 
-- `/client`: Frontend React application
-- `/server`: Backend Node.js application
+- `/pharmacie_front`: Frontend React application
+- `/pharmacie_back`: Backend Node.js application
 - `/docs`: Documentation and user guides
 
 ## Installation and Setup
@@ -55,11 +55,11 @@ The project structure is organized into the following directories:
 To install and set up the project, follow these steps:
 
 1. Clone the repository to your local machine
-2. Navigate to the `/client` directory and run `npm install` to install frontend dependencies
-3. Navigate to the `/server` directory and run `npm install` to install backend dependencies
-4. Create a `.env` file in the `/server` directory and define environment variables (e.g., PORT, MONGODB_URI, JWT_SECRET)
-5. Run `npm run dev` in the `/server` directory to start the backend server
-6. Run `npm start` in the `/client` directory to start the frontend application
+2. Navigate to the `/pharmacie_front` directory and run `npm install` to install frontend dependencies
+3. Navigate to the `/pharmacie_back` directory and run `npm install` to install backend dependencies
+4. Create a `.env` file in the `/pharmacie_back` directory and define environment variables (e.g., PORT, MONGODB_URI, JWT_SECRET)
+5. Run `npm run dev` in the `/pharmacie_back` directory to start the backend server
+6. Run `npm start` in the `/pharmacie_front` directory to start the frontend application
 
 ## Usage
 
@@ -77,7 +77,7 @@ Contributions are welcome! If you have any ideas, suggestions, or bug fixes, ple
 
 ## Credits
 
-This project was created by [Your Name] and [Contributor Name] using [Technologies].
+This project was created by [worldwebsolutions] and [mohamed abi] using [nodejs and nextjs and typescript].
 
 ## License
 
@@ -85,4 +85,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-If you have any questions or need further assistance, please contact [Your Email Address].
+If you have any questions or need further assistance, please contact [m.abi@univ-alger.dz].
