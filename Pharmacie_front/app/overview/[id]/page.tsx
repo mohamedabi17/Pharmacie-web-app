@@ -22,13 +22,20 @@ const Overview = ({ params: { id } }: { params: { id: number } }) => {
 
   return (
     <>
-      {medicament && (
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1  ">
+      {medicament ?  (
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1">
           <div>
             <MedicamentCard medicament={medicament} />
           </div>
           <div></div>
         </div>
+      ) : (
+        <>
+          <span className="loading loading-infinity loading-xs"></span>
+          <span className="loading loading-infinity loading-sm"></span>
+          <span className="loading loading-infinity loading-md"></span>
+          <span className="loading loading-infinity loading-lg"></span>
+        </>
       )}
     </>
   );
