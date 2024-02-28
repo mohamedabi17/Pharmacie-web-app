@@ -4,7 +4,6 @@ A README file for a GitHub Pharma Website Project could look something like this
 
 This is a comprehensive web application for managing a phar
 
-https://github.com/mohamedabi17/Pharmacie-web-app/assets/89711322/79a7f52e-7090-446f-802c-75fe4a1172e8
 
 macy's inventory, including tracking available medication, handling prescriptions, and managing patient records.
 
